@@ -18,7 +18,7 @@ return function(char)
 		for _,v in pairs(workspace.rain2:GetChildren())do
 			v.OffsetStudsV = v.OffsetStudsV - .6
 		end
-	end
+	end--uyyyy
 	
 	function char.Build()
 		char.inventory = r.as.Networking.NetworkingFunction:InvokeServer("GetPlayerInventory")
