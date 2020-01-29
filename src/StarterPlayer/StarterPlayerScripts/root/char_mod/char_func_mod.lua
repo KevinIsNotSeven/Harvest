@@ -40,4 +40,8 @@ return function(char)
 	function char.UseItem()
 		
 	end
+
+	function char.SellItem()
+		r.as.Networking.NetworkingEvent:FireServer("SellItem",tostring(2))
+	end
 end

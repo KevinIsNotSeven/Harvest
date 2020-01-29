@@ -10,4 +10,9 @@ function Object.new(ObjectType,...)
 	return NewObject
 end
 
+function Object:Destroy()
+	self = nil
+end
+
 return Object
+

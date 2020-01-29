@@ -21,7 +21,8 @@ r.UIS.InputBegan:Connect(function(inp)
 		r.placing_mod.Place()
 	elseif k == "N" then
 		r.placing_mod.Remove()
-	elseif k == "G"then 
+	elseif k == "G"then
+		r.char.SellItem()
 	end
 end)
 

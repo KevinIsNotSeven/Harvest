@@ -8,6 +8,9 @@ local function TestData()
 			["4"] = "None";
 			["5"] = "None";
 		};
+
+		Goins = 0;
+		Rainbows = 0;
 	};
 	
 	return Data
