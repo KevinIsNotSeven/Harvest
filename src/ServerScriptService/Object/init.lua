@@ -11,7 +11,3 @@ function Object.new(ObjectType,...)
 end
 
 return Object
-
-
-
-

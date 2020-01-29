@@ -1,5 +1,7 @@
-local NetworkingEvent = game.ReplicatedStorage.Networking.NetworkingEvent
-local NetworkingFunction = game.ReplicatedStorage.Networking.NetworkingFunction
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local NetworkingEvent = ReplicatedStorage.Networking.NetworkingEvent
+local NetworkingFunction = ReplicatedStorage.Networking.NetworkingFunction
 
 NetworkingEvent.OnClientEvent:connect(function(Id,...)
 	local Function = require(game.StarterPlayer.StarterPlayerScripts.Networking.NetworkingClient[Id])

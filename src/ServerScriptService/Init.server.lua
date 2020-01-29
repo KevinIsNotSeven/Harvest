@@ -12,9 +12,11 @@ game.Players.PlayerAdded:Connect(function(PlayerObject)
 	
 	Server:AddPlayer(Player)
 	
-	Player.Patch = Object.new("Patch")
+	wait(1)
 	
-	Player.SaveData.Hotbar["1"] = Object.new("Item","Tool","Hoe")
+	Player.SaveData.Patch = Object.new("Patch",Player)
+	
+	Player.SaveData.Hotbar["1"] = Object.new("Item","Tool","Hoe",Player)
 end)
 
 game.Players.PlayerRemoving:Connect(function(PlayerObject)
