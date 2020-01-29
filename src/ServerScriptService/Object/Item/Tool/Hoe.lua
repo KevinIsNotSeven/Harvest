@@ -12,8 +12,15 @@ function Hoe.new()
 	return NewHoe
 end
 
-function Hoe:Activate(Block)
+function Hoe:Activate(Player,Block)
+	local BlockList = _G.GetBlockList()
+	local Block = BlockList[Block]
 	
+	if not Block.Tilled then
+		Block.Tilled = true
+		
+		Block:UpdateClient("Tilled")
+	end
 end
 
 return Hoe

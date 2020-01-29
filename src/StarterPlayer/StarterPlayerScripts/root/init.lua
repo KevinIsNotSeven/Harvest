@@ -1,4 +1,5 @@
 local r = {}
+require(game.StarterPlayer.StarterPlayerScripts.Networking.NetworkingClient)
 
 function r.Start()
 	r.running = true

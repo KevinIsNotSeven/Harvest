@@ -1,16 +1,27 @@
+local Object = require(game.ServerScriptService.Object)
 local BlockScript = require(game.ServerScriptService.Object.Block)
 
-local function PlacePlant(PlayerObject,Model,PlantType,Rotation)
+local function RemovePlant(PlayerObject,Model)
 	if not Model then return end
 	
 	local Block = BlockScript.BlockList[Model]
-	
-	if Block.OccupiedBy == "None" then
+
+	if Block.OccupiedBy ~= "None" then
 		local Server = _G.GetServer()
 		local Player = Server.PlayerList[PlayerObject.userId]
-
-		Player.Patch.Grid[Block.x][Block.z]:AddPlant(PlantType,Rotation)
+		
+		if Player:HasEmptySlot() then
+			local Item = Block.OccupiedBy:CreateItem()
+			local Success = Player:GetItem(Item)
+			if not Success then
+				Item = nil
+			end
+		end
+		
+		Player.SaveData.Patch.Grid[Block.x][Block.z]:RemovePlant()
+		
+		Block:UpdateClient("OccupiedBy")
 	end	
 end
 
-return PlacePlant
+return RemovePlant

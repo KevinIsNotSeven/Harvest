@@ -22,11 +22,7 @@ function Player.new(PlayerObject)
 	NewPlayer.userId = PlayerObject.userId
 	NewPlayer.PlayerObject = PlayerObject
 	
-	NewPlayer.Patch = {}
-	
 	NewPlayer:LoadData()
-	
-	NetworkingEvent:FireClient(NewPlayer.PlayerObject,"LoadClient")
 
 	return NewPlayer
 end
@@ -132,7 +128,7 @@ function Player:UpdateData()
 end
 
 function Player:Update()
-	for _,Object in pairs(self.Patch.Grid) do
+	for _,Object in pairs(self.SaveData.Patch.Grid) do
 		for _,Block in pairs(Object) do
 			if Block.OccupiedBy ~= "None" then
 				Block.OccupiedBy:Update()

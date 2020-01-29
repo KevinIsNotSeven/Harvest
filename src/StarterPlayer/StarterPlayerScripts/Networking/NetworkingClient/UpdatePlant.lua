@@ -1,3 +1,5 @@
-local module = {}
+local function UpdatePlant()
+	
+end
 
-return module
+return UpdatePlant
