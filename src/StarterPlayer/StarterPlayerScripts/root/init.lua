@@ -18,7 +18,11 @@ function r.Start()
 	r.anim_mod = require(script.char_mod.anim_mod)
 	r.collision_mod = require(script.char_mod.collision_mod)
 	r.placing_mod = require(script.char_mod.placing_mod)
+	r.item_mod = require(script.char_mod.item_mod)
 	r.ui_mod = require(script.char_mod.ui_mod)
+	
+	r.ping_mod = require(script.ping_mod)
+	r.patch_mod = require(script.patch_mod)
 	
 	r.char = r.char_mod.New(true)
 	workspace.CurrentCamera.CameraSubject = r.char.Pal

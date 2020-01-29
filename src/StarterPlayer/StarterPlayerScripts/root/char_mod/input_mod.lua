@@ -22,6 +22,7 @@ r.UIS.InputBegan:Connect(function(inp)
 	elseif k == "N" then
 		r.placing_mod.Remove()
 	elseif k == "G"then 
+		
 	end
 end)
 
