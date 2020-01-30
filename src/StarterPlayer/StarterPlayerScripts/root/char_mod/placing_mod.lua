@@ -5,7 +5,7 @@ local NetworkingEvent = r.as.Networking.NetworkingEvent
 
 function placing_mod.Render()
 	local char = r.char
-	local cf = placing_mod.GetBlock()
+	local __,cf = placing_mod.GetBlock()
 	cf = CFrame.new(cf) * CFrame.Angles(0,math.floor(math.atan2(char.facing.lookVector.X,char.facing.lookVector.Z)/math.pi*2+.5)*math.pi/2 ,0)
 	char.Placing:SetPrimaryPartCFrame(cf)
 end
@@ -19,23 +19,23 @@ function placing_mod.GetBlock()
 	--cf = Vector3.new()
 	local f1,f2,f3 = workspace:FindPartOnRayWithWhitelist(Ray.new(cf, Vector3.new(0,-6) ), {workspace.Blocks} )
 	if f1 then
-		return f1.Position, f1, angle
+		return f1.Parent, f1.Position, angle
 	else
-		return Vector3.new()
+		return nil,Vector3.new()
 	end
 end
 
 function placing_mod.Place()
-	local _,block,rot = placing_mod.GetBlock()--that is dirt
+	local block,_,rot = placing_mod.GetBlock()--that is dirt
 	if block then
-		NetworkingEvent:FireServer("PlacePlant", block.Parent, "Flower", rot)
+		NetworkingEvent:FireServer("PlacePlant", block, "Flower", rot)
 	end
 end
 
 function placing_mod.Remove()
-	local _,block = placing_mod.GetBlock()--that is dirt
+	local block = placing_mod.GetBlock()--that is dirt
 	if block then
-		NetworkingEvent:FireServer("RemovePlant", block.Parent)
+		NetworkingEvent:FireServer("RemovePlant", block)
 	end
 end
 

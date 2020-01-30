@@ -1,4 +1,4 @@
-local r = _G.root
+local r = _G.root--ya
 local char_mod = {}
 char_mod.chars = {}
 local testtick = 0

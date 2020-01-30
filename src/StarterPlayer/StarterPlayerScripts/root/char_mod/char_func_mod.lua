@@ -18,12 +18,12 @@ return function(char)
 		for _,v in pairs(workspace.rain2:GetChildren())do
 			v.OffsetStudsV = v.OffsetStudsV - .6
 		end
-	end--uyyyy
+	end
 	
 	function char.Build()
 		char.inventory = r.as.Networking.NetworkingFunction:InvokeServer("GetPlayerInventory")
 		for k,v in pairs(char.inventory)do
-			print(type(k),v.ItemName)
+			--print(type(k),v.ItemName)
 		end
 		for i = 1,5 do
 	       -- print(char.inventory[tostring(i)].ItemName)

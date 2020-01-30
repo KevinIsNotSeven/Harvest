@@ -1,4 +1,4 @@
 local r = _G.root
-local default_mod = {}
+local ping_mod = {}
 
-return default_mod
+return ping_mod
