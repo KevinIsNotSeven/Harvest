@@ -33,6 +33,8 @@ function Player:GetItem(Item)
 	local Slot = self:GetEmptySlot()
 	
 	self.SaveData.Hotbar[Slot] = Item
+
+	Item.Player = self
 	
 	return true
 end

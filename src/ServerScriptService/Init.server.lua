@@ -16,7 +16,7 @@ game.Players.PlayerAdded:Connect(function(PlayerObject)
 	
 	Player.SaveData.Patch = Object.new("Patch",Player)
 	
-	Player.SaveData.Hotbar["1"] = Object.new("Item","Tool","Hoe",Player)
+	Player.SaveData.Hotbar["1"] = Object.new("Item","Tool","Hoe")
 end)
 
 game.Players.PlayerRemoving:Connect(function(PlayerObject)
@@ -28,6 +28,8 @@ end)
 game:BindToClose(function()
 	--wait(30)
 end)
+
+wait(1)
 
 spawn(function()
 	while wait(1) do
