@@ -1,7 +1,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 require(game.ServerScriptService.NetworkingServer)
-local Object = require(game.ServerScriptService.Object)
+local Object = require(ReplicatedStorage.Object)
 
 local Server = Object.new("Server")
 
@@ -12,7 +12,7 @@ game.Players.PlayerAdded:Connect(function(PlayerObject)
 	
 	Server:AddPlayer(Player)
 	
-	wait(1)
+	wait(2)
 	
 	Player.SaveData.Patch = Object.new("Patch",Player)
 	

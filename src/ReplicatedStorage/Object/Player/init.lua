@@ -130,6 +130,8 @@ function Player:UpdateData()
 end
 
 function Player:Update()
+	if not self.SaveData.Patch then return end
+	
 	for _,Object in pairs(self.SaveData.Patch.Grid) do
 		for _,Block in pairs(Object) do
 			if Block.OccupiedBy ~= "None" then

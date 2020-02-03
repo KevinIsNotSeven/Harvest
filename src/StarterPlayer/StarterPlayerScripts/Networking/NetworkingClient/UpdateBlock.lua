@@ -1,7 +1,7 @@
 local function UpdateBlock(x,z,Index,Value)
-	local Patch = _G.root.patch_mod.patch
+	local Patch = _G.root.patch_mod.Grid
 	
-	Patch.Grid[x][z][Index] = Value
+	Patch[x][z][Index] = Value
 end
 
 return UpdateBlock

@@ -22,12 +22,12 @@ return function(char)
 	
 	function char.Build()
 		char.inventory = r.as.Networking.NetworkingFunction:InvokeServer("GetPlayerInventory")
-		for k,v in pairs(char.inventory)do
-			--print(type(k),v.ItemName)
+		
+		for i,Item in pairs(char.inventory) do
+			if Item ~= "None" then
+				char.inventory[i] = r.item_mod.MakeItemObj(Item.ItemType,Item.ItemName)
+			end
 		end
-		for i = 1,5 do
-	       -- print(char.inventory[tostring(i)].ItemName)
-	    end
 	end
 	
 	function char.Jump()

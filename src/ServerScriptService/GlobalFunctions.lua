@@ -1,6 +1,8 @@
-local Server = require(game.ServerScriptService.Object.Server)
-local Patch = require(game.ServerScriptService.Object.Patch)
-local Block = require(game.ServerScriptService.Object.Block)
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local Server = require(ReplicatedStorage.Object.Server)
+local Patch = require(ReplicatedStorage.Object.Patch)
+local Block = require(ReplicatedStorage.Object.Block)
 
 _G.GetServer = function()
 	return Server.Server

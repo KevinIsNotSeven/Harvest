@@ -16,15 +16,16 @@ function item_mod.CanAddItem(itemobj)
 	end
 end
 
-function item_mod.MakeItemObj(name)
-	local item = require(r.as.Items:FindFirstChild(name,true).ItemScript)()
-	return item
+function item_mod.MakeItemObj(ItemType,ItemName)
+	local Object = require(r.as.Object)
+
+	local Item = Object.new("Item",ItemType,ItemName)
 end
 
 function item_mod.AddItemFromName(name)
 	item_mod.AddItem(item_mod.inventory, item_mod.MakeItemObj(name))
 end
 
-item_mod.AddItemFromName("Scuffler")
+--item_mod.AddItemFromName("Scuffler")
 
 return item_mod

@@ -23,5 +23,9 @@ function Hoe:Activate(Player,Block)
 	end
 end
 
+function Hoe:Test()
+	print("asdasd")
+end
+
 return Hoe
 

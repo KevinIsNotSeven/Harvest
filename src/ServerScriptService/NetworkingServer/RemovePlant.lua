@@ -1,5 +1,7 @@
-local Object = require(game.ServerScriptService.Object)
-local BlockScript = require(game.ServerScriptService.Object.Block)
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local Object = require(ReplicatedStorage.Object)
+local BlockScript = require(ReplicatedStorage.Object.Block)
 
 local function RemovePlant(PlayerObject,Model)
 	if not Model then return end
@@ -18,7 +20,9 @@ local function RemovePlant(PlayerObject,Model)
 			end
 		end
 		
-		Player.Patch.Grid[Block.x][Block.z]:RemovePlant()
+		Player.SaveData.Patch.Grid[Block.x][Block.z]:RemovePlant()
+		
+		Block:UpdateClient("OccupiedBy")
 	end	
 end
 
