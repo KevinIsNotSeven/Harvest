@@ -7,19 +7,19 @@ local Plant = {}
 Plant.__index = Plant
 setmetatable(Plant,{__index = Object})
 
-function Plant.new(PlantType,Block,Rotation,...)
+function Plant.new(PlantType,BlockModel,Rotation,...)
 	local Module = require(script[PlantType])
 	local NewPlant = Module.new(...)
 	
 	NewPlant.PlantType = PlantType
 	NewPlant.Stage = 1
 	NewPlant.Ticks = 0
-	NewPlant.Block = Block
+	NewPlant.BlockModel = BlockModel
 	NewPlant.Rotation = Rotation
 	
 	NewPlant.Model = ReplicatedStorage.Plants[PlantType][NewPlant.Stage]:Clone()
 	
-	NewPlant.Model:SetPrimaryPartCFrame(CFrame.new(NewPlant.Block.Model.Part1.Position) * CFrame.Angles(0,NewPlant.Rotation * math.pi/2,0))
+	NewPlant.Model:SetPrimaryPartCFrame(CFrame.new(NewPlant.BlockModel.Part1.Position) * CFrame.Angles(0,NewPlant.Rotation * math.pi/2,0))
 	NewPlant.Model.Parent = game.Workspace.Plants
 	
 	return NewPlant
@@ -47,7 +47,7 @@ function Plant:IncreaseStage()
 		self.Model:Destroy()
 		
 		self.Model = ReplicatedStorage.Plants[self.PlantType][self.Stage]:Clone()
-		self.Model:SetPrimaryPartCFrame(CFrame.new(self.Block.Model.Part1.Position) * CFrame.Angles(0,self.Rotation * math.pi/2,0))
+		self.Model:SetPrimaryPartCFrame(CFrame.new(self.BlockModel.Part1.Position) * CFrame.Angles(0,self.Rotation * math.pi/2,0))
 		self.Model.Parent = game.Workspace.Plants
 	end
 end

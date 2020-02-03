@@ -32,7 +32,7 @@ end
 
 function Block:AddPlant(PlantType,Rotation)
 	if self.OccupiedBy == "None" then
-		local Plant = Object.new("Plant",PlantType,self,Rotation)
+		local Plant = Object.new("Plant",PlantType,self.Model,Rotation)
 	
 		self.OccupiedBy = Plant
 	end
