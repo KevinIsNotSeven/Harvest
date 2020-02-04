@@ -1,6 +1,5 @@
 local r = _G.root
 local patch_mod = {}
-print("PATCH")
 
 patch_mod.Grid = {}
 setmetatable(patch_mod.Grid,{__index = function(_,x)

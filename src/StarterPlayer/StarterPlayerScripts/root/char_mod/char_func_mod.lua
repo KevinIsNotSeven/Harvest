@@ -28,7 +28,6 @@ return function(char)
 			if Item ~= "None" then
 				r.item_mod.inventory[i] = r.item_mod.MakeItemObj(Item.ItemType,Item.ItemName)
 			end
-			--print(i,Item.ItemType,Item.ItemName)
 		end
 		r.ui_mod.Breh()
 	end

@@ -8,12 +8,10 @@ local Server = Object.new("Server")
 require(game.ServerScriptService.GlobalFunctions)
 
 game.Players.PlayerAdded:Connect(function(PlayerObject)	
+	wait(.1)
 	local Player = Object.new("Player",PlayerObject)
 	
 	Server:AddPlayer(Player)
-	
-	wait(2)
-	print("HELP!!!")
 	
 	Player.SaveData.Patch = Object.new("Patch",Player)
 	

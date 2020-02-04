@@ -45,7 +45,6 @@ end
 function ui_mod.Breh()
 	for x=1,5 do
 		local item = r.item_mod.inventory[tostring(x)]
-		print(item)
 		if item~="None" then
 			local ItemButton = ui_mod.MakeItemButton(item.Model, x)
 			ItemButton.Parent = UI.Inventory.Hotbar
