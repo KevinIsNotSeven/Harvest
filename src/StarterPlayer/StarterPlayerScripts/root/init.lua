@@ -29,7 +29,7 @@ function r.Start()
 	workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
 	
 	function r.PreStep()
-		local input = r.ControlModule:GetMoveVector()
+		local input = r.ControlModule:GetMoveVector()--i am livid
 		if input.Magnitude > .2 then
 			if input.Magnitude > 1 then
 				input = input.Unit
