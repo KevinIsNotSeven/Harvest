@@ -15,7 +15,11 @@ function Item.new(ItemType,ItemName,...)
 	
 	NewItem.Useable = false
 
-	NewItem.Model = ReplicatedStorage.Items[NewItem.ItemType .. "s"][ItemName]:Clone()
+	if ReplicatedStorage.Items[NewItem.ItemType .. "s"]:FindFirstChild(ItemName) then
+		NewItem.Model = ReplicatedStorage.Items[NewItem.ItemType .. "s"][ItemName]
+	else
+		NewItem.Model = ReplicatedStorage.Items.Template
+	end
 
 	return NewItem
 end
