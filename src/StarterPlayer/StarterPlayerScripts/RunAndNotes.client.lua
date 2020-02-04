@@ -1,5 +1,4 @@
-_G.root = require(script.Parent:WaitForChild("root"))
-_G.root.Start()
+require(game.StarterPlayer.StarterPlayerScripts.Networking.NetworkingClient)
 --[[
 	sup dan
 	weird mental casing i do:

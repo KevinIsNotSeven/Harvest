@@ -22,7 +22,10 @@ function ui_mod.MakeItemButton(Model, x)
 	Model.Parent = ItemButton.ViewportFrame
 	local Model = ui_mod.MakeCopy(Model, ItemButton)
 	ItemButton.MouseButton1Down:Connect(function()
-		r.item_mod.inventory[x].Activate(x, r.placing_mod.GetBlock())
+		r.char.anim.Till:Play()
+		local block = r.placing_mod.GetBlock()
+		r.char.facing = CFrame.new(Vector3.new(), block.Part1.Position*Vector3.new(1,0,1)- r.char.pos*Vector3.new(1,0,1))
+		r.item_mod.inventory[tostring(x)]:Test(tostring(x), block)
 	end)
 	ItemButton.ItemSlot.Value = x or 0
 	return ItemButton
@@ -40,11 +43,15 @@ function ui_mod.MakeCopy(Model, ItemButton)
 end
 
 function ui_mod.Breh()
-	for x,v in pairs(r.item_mod.inventory)do
-		local ItemButton = ui_mod.MakeItemButton(v.Model, x)
-		ItemButton.Parent = UI.Inventory.Hotbar
+	for x=1,5 do
+		local item = r.item_mod.inventory[tostring(x)]
+		print(item)
+		if item~="None" then
+			local ItemButton = ui_mod.MakeItemButton(item.Model, x)
+			ItemButton.Parent = UI.Inventory.Hotbar
+			ui_mod.MakeItemButton(item.Model, x)
+		end
 	end
 end
-ui_mod.Breh()
 
 return ui_mod
