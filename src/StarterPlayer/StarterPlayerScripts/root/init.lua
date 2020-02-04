@@ -1,5 +1,4 @@
 local r = {}
-require(game.StarterPlayer.StarterPlayerScripts.Networking.NetworkingClient)
 
 function r.Start()
 	r.running = true
@@ -41,7 +40,6 @@ function r.Start()
 		else
 			input = Vector3.new()
 		end
-		
 		r.char.camerainput = input
 		r.char.input = r.ControlModule:GetMoveVector()
 	end
@@ -54,19 +52,21 @@ function r.Start()
 		r.char.Render()
 	end
 
-	while r.running do
-		local DoStepTick = tick()
-		--wait()
-		r.RSW:Wait()
-		if not r.StepFrames then
-			r.PreStep()
-			while DoStepTick < tick() do
-				DoStepTick = DoStepTick + 1/120
-				r.Step()
+	spawn(function()
+		while r.running do
+			local DoStepTick = tick()
+			--wait()
+			r.RSW:Wait()
+			if not r.StepFrames then
+				r.PreStep()
+				while DoStepTick < tick() do
+					DoStepTick = DoStepTick + 1/120
+					r.Step()
+				end
+				r.PostStep()
 			end
-			r.PostStep()
 		end
-	end
+	end)
 end
 
 return r

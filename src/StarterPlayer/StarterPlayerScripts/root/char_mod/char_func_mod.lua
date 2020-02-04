@@ -18,16 +18,19 @@ return function(char)
 		for _,v in pairs(workspace.rain2:GetChildren())do
 			v.OffsetStudsV = v.OffsetStudsV - .6
 		end
+		char.RenderItem()
 	end
 	
 	function char.Build()
-		char.inventory = r.as.Networking.NetworkingFunction:InvokeServer("GetPlayerInventory")
+		r.item_mod.inventory = r.as.Networking.NetworkingFunction:InvokeServer("GetPlayerInventory")
 		
-		for i,Item in pairs(char.inventory) do
+		for i,Item in pairs(r.item_mod.inventory) do
 			if Item ~= "None" then
-				char.inventory[i] = r.item_mod.MakeItemObj(Item.ItemType,Item.ItemName)
+				r.item_mod.inventory[i] = r.item_mod.MakeItemObj(Item.ItemType,Item.ItemName)
 			end
+			--print(i,Item.ItemType,Item.ItemName)
 		end
+		r.ui_mod.Breh()
 	end
 	
 	function char.Jump()
@@ -43,5 +46,12 @@ return function(char)
 
 	function char.SellItem()
 		r.as.Networking.NetworkingEvent:FireServer("SellItem",tostring(2))
+	end
+
+	function char.RenderItem()
+		local Model = r.item_mod.inventory[tostring(1)].Model
+		Model.Parent = workspace
+		local origin = Model.Base.Origin.CFrame
+		Model.Base.CFrame = char.Pal.Arm2R.CFrame*char.Pal.Arm2R.HandAttachment.CFrame * (origin-origin.p)*CFrame.new(-origin.p) --:Inverse()
 	end
 end

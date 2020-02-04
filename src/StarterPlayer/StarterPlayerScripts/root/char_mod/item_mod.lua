@@ -20,6 +20,7 @@ function item_mod.MakeItemObj(ItemType,ItemName)
 	local Object = require(r.as.Object)
 
 	local Item = Object.new("Item",ItemType,ItemName)
+	return Item
 end
 
 function item_mod.AddItemFromName(name)
