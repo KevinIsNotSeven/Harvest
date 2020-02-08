@@ -16,12 +16,17 @@ function Plant.new(PlantType,BlockModel,Rotation,...)
 	NewPlant.Ticks = 0
 	NewPlant.BlockModel = BlockModel
 	NewPlant.Rotation = Rotation
-	
-	NewPlant.Model = ReplicatedStorage.Plants[PlantType][NewPlant.Stage]:Clone()
-	
+
+	NewPlant.Model = ReplicatedStorage.Plants[NewPlant.PlantType][NewPlant.PlantType .. tostring(NewPlant.Stage)]:Clone()
 	NewPlant.Model:SetPrimaryPartCFrame(CFrame.new(NewPlant.BlockModel.Part1.Position) * CFrame.Angles(0,NewPlant.Rotation * math.pi/2,0))
+
+	local BasePosition = NewPlant.Model.PrimaryPart.Position
+	local BaseSize = NewPlant.Model.PrimaryPart.Size
+
+	NewPlant.Model.Plant:SetPrimaryPartCFrame(CFrame.new(Vector3.new(BasePosition.X,BasePosition.Y + BaseSize.Y/2 + NewPlant.Model.Plant.Dirt.Size.Y/2,BasePosition.Z)))
+
 	NewPlant.Model.Parent = game.Workspace.Plants
-	
+
 	return NewPlant
 end
 
@@ -46,8 +51,14 @@ function Plant:IncreaseStage()
 					
 		self.Model:Destroy()
 		
-		self.Model = ReplicatedStorage.Plants[self.PlantType][self.Stage]:Clone()
+		self.Model = ReplicatedStorage.Plants[self.PlantType][self.PlantType .. tostring(self.Stage)]:Clone()
 		self.Model:SetPrimaryPartCFrame(CFrame.new(self.BlockModel.Part1.Position) * CFrame.Angles(0,self.Rotation * math.pi/2,0))
+
+		local BasePosition = self.Model.PrimaryPart.Position
+		local BaseSize = self.Model.PrimaryPart.Size
+
+		self.Model.Plant:SetPrimaryPartCFrame(CFrame.new(Vector3.new(BasePosition.X,BasePosition.Y + BaseSize.Y/2 + self.Model.Plant.Dirt.Size.Y/2,BasePosition.Z)))
+
 		self.Model.Parent = game.Workspace.Plants
 	end
 end

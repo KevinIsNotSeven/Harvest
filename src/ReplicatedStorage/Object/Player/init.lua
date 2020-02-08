@@ -23,8 +23,8 @@ function Player.new(PlayerObject)
 	NewPlayer.PlayerObject = PlayerObject
 	
 	NewPlayer:LoadData()
-	NewPlayer.SaveData.Hotbar["1"] = Object.new("Item","Tool","Hoe")
-	NetworkingEvent:FireClient(NewPlayer.PlayerObject, "LoadClient")
+
+	NetworkingEvent:FireClient(NewPlayer.PlayerObject,"LoadClient")
 
 	return NewPlayer
 end
@@ -35,8 +35,7 @@ function Player:GetItem(Item)
 	local Slot = self:GetEmptySlot()
 	
 	self.SaveData.Hotbar[Slot] = Item
-
-	Item.Player = self
+	NetworkingEvent:FireClient(self.PlayerObject,"UpdateInventory",Slot,Item)
 	
 	return true
 end

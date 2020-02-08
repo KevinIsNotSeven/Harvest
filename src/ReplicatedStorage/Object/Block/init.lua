@@ -15,7 +15,6 @@ function Block.new(BlockType,Position,Player,...)
 	NewBlock.BlockType = BlockType
 		
 	NewBlock.OccupiedBy = "None"
-	NewBlock.Patch = {}
 	NewBlock.Player = Player
 	NewBlock.x = {}
 	NewBlock.z = {}
@@ -46,8 +45,8 @@ function Block:RemovePlant()
 	end
 end
 
-function Block:UpdateClient(Index)
-	NetworkingEvent:FireClient(self.Player.PlayerObject,"UpdateBlock",self.x,self.z,Index,self[Index])
+function Block:UpdateClient(Player,Index)
+	NetworkingEvent:FireClient(Player.PlayerObject,"UpdateBlock",self.x,self.z,Index,self[Index])
 end
 
 return Block

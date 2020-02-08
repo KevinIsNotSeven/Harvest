@@ -27,6 +27,4 @@ function item_mod.AddItemFromName(name)
 	item_mod.AddItem(item_mod.inventory, item_mod.MakeItemObj(name))
 end
 
---item_mod.AddItemFromName("Scuffler")
-
 return item_mod

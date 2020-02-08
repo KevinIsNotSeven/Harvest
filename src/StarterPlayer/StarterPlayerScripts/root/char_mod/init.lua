@@ -24,6 +24,9 @@ function char_mod.New(client)
 	char.terp = false
 	char.Placing = ReplicatedStorage.Plants.Flower.Placement:Clone()
 	char.Placing.Parent = workspace
+
+	char.SelectedSlot = "1"
+
 	--bruh!
 	
 	require(script.char_step_mod)(char)

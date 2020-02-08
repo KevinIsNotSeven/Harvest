@@ -12,8 +12,6 @@ function Item.new(ItemType,ItemName,...)
 	local NewItem = Module.new(ItemName,...)
 	
 	NewItem.ItemType = ItemType
-	
-	NewItem.Useable = false
 
 	if ReplicatedStorage.Items[NewItem.ItemType .. "s"]:FindFirstChild(ItemName) then
 		NewItem.Model = ReplicatedStorage.Items[NewItem.ItemType .. "s"][ItemName]
@@ -30,6 +28,10 @@ function Item:Sell()
 	self.Player.SaveData.Goins = self.Player.SaveData.Goins + Value
 
 	self:Destroy()
+end
+
+function Item:ActivateClient()
+	print("Go. Bwah.")
 end
 
 return Item

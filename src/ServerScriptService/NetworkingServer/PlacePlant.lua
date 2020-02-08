@@ -14,7 +14,7 @@ local function PlacePlant(PlayerObject,Model,PlantType,Rotation)
 
 		Player.SaveData.Patch.Grid[Block.x][Block.z]:AddPlant(PlantType,Rotation)
 
-		Block:UpdateClient("OccupiedBy")
+		Block:UpdateClient(Player,"OccupiedBy")
 	end	
 end
 

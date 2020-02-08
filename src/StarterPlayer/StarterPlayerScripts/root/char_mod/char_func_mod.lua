@@ -23,7 +23,7 @@ return function(char)
 	
 	function char.Build()
 		r.item_mod.inventory = r.as.Networking.NetworkingFunction:InvokeServer("GetPlayerInventory")
-		
+
 		for i,Item in pairs(r.item_mod.inventory) do
 			if Item ~= "None" then
 				r.item_mod.inventory[i] = r.item_mod.MakeItemObj(Item.ItemType,Item.ItemName)
@@ -47,10 +47,16 @@ return function(char)
 		r.as.Networking.NetworkingEvent:FireServer("SellItem",tostring(2))
 	end
 
+	function char.SelectItem()
+		
+	end
+
 	function char.RenderItem()
-		local Model = r.item_mod.inventory[tostring(1)].Model
-		Model.Parent = workspace
-		local origin = Model.Base.Origin.CFrame
-		Model.Base.CFrame = char.Pal.Arm2R.CFrame*char.Pal.Arm2R.HandAttachment.CFrame * (origin-origin.p)*CFrame.new(-origin.p) --:Inverse()
+		if r.item_mod.inventory["1"] ~= "None" then
+			local Model = r.item_mod.inventory["1"].Model
+			Model.Parent = workspace
+			local origin = Model.Base.Origin.CFrame
+			Model.Base.CFrame = char.Pal.Arm2R.CFrame*char.Pal.Arm2R.HandAttachment.CFrame * (origin-origin.p)*CFrame.new(-origin.p) --:Inverse()
+		end
 	end
 end

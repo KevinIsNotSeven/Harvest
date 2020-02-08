@@ -22,7 +22,7 @@ local function RemovePlant(PlayerObject,Model)
 		
 		Player.SaveData.Patch.Grid[Block.x][Block.z]:RemovePlant()
 		
-		Block:UpdateClient("OccupiedBy")
+		Block:UpdateClient(Player,"OccupiedBy")
 	end	
 end
 

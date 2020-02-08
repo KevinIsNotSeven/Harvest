@@ -13,7 +13,6 @@ function Patch.new(Player)
 	setmetatable(NewPatch,Patch)
 
 	NewPatch.Grid = {}
-	NewPatch.Player = Player
 	
 	setmetatable(NewPatch.Grid,{__index = function(_,x)
 		NewPatch.Grid[x] = {}
@@ -34,15 +33,13 @@ function Patch.new(Player)
 			local Dirt = Object.new("Block","Dirt",Vector3.new(x * NewPatch.BlockSize - NewPatch.BlockSize/2, 0, z * NewPatch.BlockSize - NewPatch.BlockSize/2) + Offset,NewPatch.Player)
 		
 			NewPatch.Grid[tostring(x)][tostring(z)] = Dirt
-			NewPatch:UpdateClient(tostring(x),tostring(z))
-			
-			Dirt.Patch = NewPatch
+			NewPatch:UpdateClient(Player,tostring(x),tostring(z))
 			
 			Dirt.x = tostring(x)
-			Dirt:UpdateClient(x)
+			Dirt:UpdateClient(Player,x)
 			
 			Dirt.z = tostring(z)
-			Dirt:UpdateClient(z)
+			Dirt:UpdateClient(Player,z)
 			
 			Block.BlockList[Dirt.Model] = Dirt
 		end
@@ -51,10 +48,10 @@ function Patch.new(Player)
 	return NewPatch
 end
 
-function Patch:UpdateClient(x,z)
+function Patch:UpdateClient(Player,x,z)
 	local Block = self.Grid[x][z]
 	
-	NetworkingEvent:FireClient(self.Player.PlayerObject,"UpdatePatch",x,z,Block)
+	NetworkingEvent:FireClient(Player.PlayerObject,"UpdatePatch",x,z,Block)
 end
 
 return Patch
