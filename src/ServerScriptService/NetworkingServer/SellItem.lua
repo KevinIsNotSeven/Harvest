@@ -3,7 +3,7 @@ local function SellItem(Player,Slot)
     local Player = Server.PlayerList[Player.userId]
     local Item = Player.SaveData.Hotbar[Slot]
     Item:Sell()
-    Player.SaveData.Hotbar[Slot] = "None"
+    Player.SaveData.Hotbar[Slot]["1"] = "None"
 end
 
 return SellItem

@@ -29,20 +29,68 @@ function Player.new(PlayerObject)
 	return NewPlayer
 end
 
-function Player:GetItem(Item)
-	if not self:HasEmptySlot() then return false end
+function Player:GiveItem(Item,Amount)
+	if not Amount then Amount = 1 end
+	if not Item.Stackable and Amount > 1 then return false end
+
+	if Item.Stackable then
+		local Slot = self:CheckForItem(Item)
+		
+		if Slot then
+			self.SaveData.Hotbar[Slot]["2"] = self.SaveData.Hotbar[Slot]["2"] + Amount
+			NetworkingEvent:FireClient(self.PlayerObject,"UpdateInventory",Slot,Item,Amount)
+			Item = nil
+
+			return true
+		else
+			if not self:HasEmptySlot() then return false end
 	
-	local Slot = self:GetEmptySlot()
+			local Slot = self:GetEmptySlot()
+			
+			self.SaveData.Hotbar[Slot]["1"] = Item
+			self.SaveData.Hotbar[Slot]["2"] = Amount
+			NetworkingEvent:FireClient(self.PlayerObject,"UpdateInventory",Slot,Item,Amount)
+
+			return true
+		end
+	else
+		if not self:HasEmptySlot() then return false end
 	
-	self.SaveData.Hotbar[Slot] = Item
-	NetworkingEvent:FireClient(self.PlayerObject,"UpdateInventory",Slot,Item)
+		local Slot = self:GetEmptySlot()
+		
+		self.SaveData.Hotbar[Slot]["1"] = Item
+		self.SaveData.Hotbar[Slot]["2"] = Amount
+		NetworkingEvent:FireClient(self.PlayerObject,"UpdateInventory",Slot,Item,Amount)
+
+		return true
+	end
 	
-	return true
+	return false
+end
+
+function Player:GetItem(Slot)
+	 if self.SaveData.Hotbar[tostring(Slot)]["1"] then
+		return self.SaveData.Hotbar[tostring(Slot)]["1"]
+	 end
+
+	 return false
+end
+
+function Player:CheckForItem(Item1)
+	for i = 1,5 do 
+		local Item2 = self.SaveData.Hotbar[tostring(i)]["1"]
+
+		if Item1.ItemType == Item2.ItemType and Item1.ItemName == Item2.ItemName then
+			return tostring(i)
+		end
+	end
+
+	return false
 end
 
 function Player:HasEmptySlot()
-	for _,Item in pairs(self.SaveData.Hotbar) do
-		if Item == "None" then
+	for _,Slot in pairs(self.SaveData.Hotbar) do
+		if Slot["1"] == "None" then
 			return true
 		end
 	end
@@ -54,7 +102,7 @@ function Player:GetEmptySlot()
 	if not self:HasEmptySlot() then return end
 	
 	for i = 1,5 do
-		if self.SaveData.Hotbar[tostring(i)] == "None" then
+		if self.SaveData.Hotbar[tostring(i)]["1"] == "None" then
 			return tostring(i)
 		end
 	end
@@ -62,7 +110,11 @@ end
 
 function Player:PrintInventory()
 	for i = 1,5 do
-		print(self.SaveData.Hotbar[tostring(i)].ItemName)
+		if self.SaveData.Hotbar[tostring(i)]["1"] ~= "None" then
+			print(tostring(i),self.SaveData.Hotbar[tostring(i)]["1"].DisplayName,self.SaveData.Hotbar[tostring(i)]["2"])
+		else
+			print(tostring(i),"None","0")
+		end
 	end
 end
 

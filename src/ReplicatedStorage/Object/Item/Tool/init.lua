@@ -11,9 +11,7 @@ function Tool.new(ToolType,...)
 	
 	NewTool.ToolType = ToolType
 	NewTool.ItemName = ToolType
-	
-	NewTool.Useable = true
-	
+
 	return NewTool
 end
 

@@ -14,7 +14,7 @@ local function RemovePlant(PlayerObject,Model)
 		
 		if Player:HasEmptySlot() then
 			local Item = Block.OccupiedBy:CreateItem()
-			local Success = Player:GetItem(Item)
+			local Success = Player:GiveItem(Item)
 			if not Success then
 				Item = nil
 			end

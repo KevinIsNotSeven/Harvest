@@ -1,9 +1,9 @@
 local function ActivateHotbar(Player,Slot,...)
 	local Server = _G.GetServer()
 	local Player = Server.PlayerList[Player.userId]
-	local Item = Player.SaveData.Hotbar[tostring(Slot)]
+	local Item = Player:GetItem(Slot)
 
-	if Item.Useable then
+	if Item.Activatable then
 		Item:Activate(Player,...)
 	end
 end

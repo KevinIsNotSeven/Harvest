@@ -12,8 +12,6 @@ function Seed.new(SeedType,...)
 	NewSeed.SeedType = SeedType
 	NewSeed.ItemName = SeedType
 	
-	NewSeed.Useable = true
-
 	return NewSeed
 end
 
@@ -33,13 +31,13 @@ function Seed:Activate(PlayerObject,Model,Rotation)
 	end
 end
 
-function Seed:ActivateClient()
+function Seed:ActivateClient(Slot)
 	local r = _G.root
 
 	local block,_,rot = r.placing_mod.GetBlock()
 	r.char.facing = CFrame.new(Vector3.new(),block.Part1.Position*Vector3.new(1,0,1) - r.char.pos*Vector3.new(1,0,1))
 
-	Object.NetworkingEvent:FireServer("ActivateHotbar",r.char.SelectedSlot,block,rot)
+	Object.NetworkingEvent:FireServer("ActivateHotbar",Slot,block,rot)
 end
 
 return Seed

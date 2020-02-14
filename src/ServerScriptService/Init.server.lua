@@ -12,9 +12,11 @@ game.Players.PlayerAdded:Connect(function(PlayerObject)
 	local Player = Object.new("Player",PlayerObject)
 	Server:AddPlayer(Player)
 
-	wait(1)
-	Player:GetItem(Object.new("Item","Tool","Hoe"))
-	Player:GetItem(Object.new("Item","Seed","Apple"))
+	wait(2)
+	Player:GiveItem(Object.new("Item","Tool","Hoe"))
+	Player:GiveItem(Object.new("Item","Seed","Apple"),2)
+
+	Player:PrintInventory()
 
 	Player.SaveData.Patch = Object.new("Patch",Player)
 end)

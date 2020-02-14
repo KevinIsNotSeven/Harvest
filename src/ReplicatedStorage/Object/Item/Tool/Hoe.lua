@@ -23,14 +23,14 @@ function Hoe:Activate(Player,Block)
 	end
 end
 
-function Hoe:ActivateClient()
+function Hoe:ActivateClient(Slot)
 	local r = _G.root
 
 	r.char.anim.Till:Play()
 	local block = r.placing_mod.GetBlock()
 	r.char.facing = CFrame.new(Vector3.new(), block.Part1.Position*Vector3.new(1,0,1)- r.char.pos*Vector3.new(1,0,1))
 
-	Object.NetworkingEvent:FireServer("ActivateHotbar",r.char.SelectedSlot,block)
+	Object.NetworkingEvent:FireServer("ActivateHotbar",Slot,block)
 end
 
 return Hoe

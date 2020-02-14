@@ -22,7 +22,9 @@ function ui_mod.MakeItemButton(Model, x)
 	Model.Parent = ItemButton.ViewportFrame
 	local Model = ui_mod.MakeCopy(Model, ItemButton)
 	ItemButton.MouseButton1Down:Connect(function()
-		r.item_mod.inventory[tostring(x)]:ActivateClient()
+		if r.item_mod.inventory[tostring(x)].Activatable then
+			r.item_mod.inventory[tostring(x)]:ActivateClient(tostring(x))
+		end
 	end)
 	ItemButton.ItemSlot.Value = x or 0
 	return ItemButton
@@ -48,7 +50,7 @@ function ui_mod.Breh()
 	end
 
 	for x=1,5 do
-		local item = r.item_mod.inventory[tostring(x)]
+		local item = r.item_mod.inventory[tostring(x)]["1"]
 		if item~="None" then
 			local ItemButton = ui_mod.MakeItemButton(item.Model, x)
 			ItemButton.Parent = UI.Inventory.Hotbar

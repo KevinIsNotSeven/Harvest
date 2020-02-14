@@ -24,9 +24,12 @@ return function(char)
 	function char.Build()
 		r.item_mod.inventory = r.as.Networking.NetworkingFunction:InvokeServer("GetPlayerInventory")
 
-		for i,Item in pairs(r.item_mod.inventory) do
-			if Item ~= "None" then
-				r.item_mod.inventory[i] = r.item_mod.MakeItemObj(Item.ItemType,Item.ItemName)
+		for i,Slot in pairs(r.item_mod.inventory) do
+			if Slot["1"] ~= "None" then
+				local Item = Slot["1"]
+				local Amount = Slot["2"]
+				r.item_mod.inventory[i]["1"] = r.item_mod.MakeItemObj(Item.ItemType,Item.ItemName)
+				r.item_mod.inventory[i]["2"] = Amount
 			end
 		end
 		r.ui_mod.Breh()
@@ -52,8 +55,8 @@ return function(char)
 	end
 
 	function char.RenderItem()
-		if r.item_mod.inventory["1"] ~= "None" then
-			local Model = r.item_mod.inventory["1"].Model
+		if r.item_mod.inventory["1"]["1"] ~= "None" then
+			local Model = r.item_mod.inventory["1"]["1"].Model
 			Model.Parent = workspace
 			local origin = Model.Base.Origin.CFrame
 			Model.Base.CFrame = char.Pal.Arm2R.CFrame*char.Pal.Arm2R.HandAttachment.CFrame * (origin-origin.p)*CFrame.new(-origin.p) --:Inverse()
