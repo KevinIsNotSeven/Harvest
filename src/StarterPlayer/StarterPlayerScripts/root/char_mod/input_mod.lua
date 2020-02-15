@@ -11,8 +11,8 @@ local stupidfuckingtable = {
 
 r.UIS.InputBegan:Connect(function(inp,processed)
 	if inp.UserInputType == Enum.UserInputType.MouseButton1 then
-		if r.item_mod.inventory[r.char.SelectedSlot] ~= "None" and not processed and r.item_mod.inventory[r.char.SelectedSlot].Activatable then
-			r.item_mod.inventory[r.char.SelectedSlot]:ActivateClient(r.char.SelectedSlot)
+		if r.item_mod.inventory[r.char.SelectedSlot]["1"] ~= "None" and not processed and r.item_mod.inventory[r.char.SelectedSlot]["1"].Activatable then
+			r.item_mod.inventory[r.char.SelectedSlot]["1"]:ActivateClient(r.char.SelectedSlot)
 		end
 	elseif inp.UserInputType == Enum.UserInputType.Keyboard then
 		local k = inp.KeyCode.Name

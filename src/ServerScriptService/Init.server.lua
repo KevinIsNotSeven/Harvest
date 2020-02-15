@@ -14,9 +14,8 @@ game.Players.PlayerAdded:Connect(function(PlayerObject)
 
 	wait(2)
 	Player:GiveItem(Object.new("Item","Tool","Hoe"))
-	Player:GiveItem(Object.new("Item","Seed","Apple"),2)
-
-	Player:PrintInventory()
+	Player:GiveItem(Object.new("Item","Tool","WateringCan"))
+	Player:GiveItem(Object.new("Item","Seed","Apple"),10)
 
 	Player.SaveData.Patch = Object.new("Patch",Player)
 end)

@@ -22,8 +22,8 @@ function ui_mod.MakeItemButton(Model, x)
 	Model.Parent = ItemButton.ViewportFrame
 	local Model = ui_mod.MakeCopy(Model, ItemButton)
 	ItemButton.MouseButton1Down:Connect(function()
-		if r.item_mod.inventory[tostring(x)].Activatable then
-			r.item_mod.inventory[tostring(x)]:ActivateClient(tostring(x))
+		if r.item_mod.inventory[tostring(x)]["1"].Activatable then
+			r.item_mod.inventory[tostring(x)]["1"]:ActivateClient(tostring(x))
 		end
 	end)
 	ItemButton.ItemSlot.Value = x or 0

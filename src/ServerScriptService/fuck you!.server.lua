@@ -33,5 +33,5 @@ while true do
 	lighting.sky.Color = findclosestkeypoint(Daytype.SkyColor.ParticleEmitter.Color.Keypoints)
 	lighting.stars.Transparency = findclosestkeypoint(Daytype.StarTransparency.ParticleEmitter.Color.Keypoints).r
 	game.Lighting.Ambient = findclosestkeypoint(Daytype.Ambient.ParticleEmitter.Color.Keypoints)
-	workspace.clocktime.SurfaceGui.TextLabel.Text = math.floor(clocktime)
+	--workspace.clocktime.SurfaceGui.TextLabel.Text = math.floor(clocktime)
 end

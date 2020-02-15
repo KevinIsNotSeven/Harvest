@@ -9,8 +9,6 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local DataStoreService = game:GetService("DataStoreService")
 --local PlayerDataStore = DataStoreService:GetDataStore("PlayerData")
 
-local NetworkingEvent = ReplicatedStorage.Networking.NetworkingEvent
-
 local Player = {}
 Player.__index = Player
 setmetatable(Player,{__index = Object})
@@ -24,7 +22,7 @@ function Player.new(PlayerObject)
 	
 	NewPlayer:LoadData()
 
-	NetworkingEvent:FireClient(NewPlayer.PlayerObject,"LoadClient")
+	Object.NetworkingEvent:FireClient(NewPlayer.PlayerObject,"LoadClient")
 
 	return NewPlayer
 end
@@ -38,7 +36,7 @@ function Player:GiveItem(Item,Amount)
 		
 		if Slot then
 			self.SaveData.Hotbar[Slot]["2"] = self.SaveData.Hotbar[Slot]["2"] + Amount
-			NetworkingEvent:FireClient(self.PlayerObject,"UpdateInventory",Slot,Item,Amount)
+			Object.NetworkingEvent:FireClient(self.PlayerObject,"UpdateInventory",Slot,Item,Amount)
 			Item = nil
 
 			return true
@@ -49,7 +47,7 @@ function Player:GiveItem(Item,Amount)
 			
 			self.SaveData.Hotbar[Slot]["1"] = Item
 			self.SaveData.Hotbar[Slot]["2"] = Amount
-			NetworkingEvent:FireClient(self.PlayerObject,"UpdateInventory",Slot,Item,Amount)
+			Object.NetworkingEvent:FireClient(self.PlayerObject,"UpdateInventory",Slot,Item,Amount)
 
 			return true
 		end
@@ -60,12 +58,18 @@ function Player:GiveItem(Item,Amount)
 		
 		self.SaveData.Hotbar[Slot]["1"] = Item
 		self.SaveData.Hotbar[Slot]["2"] = Amount
-		NetworkingEvent:FireClient(self.PlayerObject,"UpdateInventory",Slot,Item,Amount)
+		Object.NetworkingEvent:FireClient(self.PlayerObject,"UpdateInventory",Slot,Item,Amount)
 
 		return true
 	end
 	
 	return false
+end
+
+function Player:RemoveItem(Slot)
+	self.SaveData.Hotbar[Slot]["1"]:Destroy()
+	self.SaveData.Hotbar[Slot]["1"] = "None"
+	self.SaveData.Hotbar[Slot]["2"] = 0
 end
 
 function Player:GetItem(Slot)
@@ -81,6 +85,16 @@ function Player:CheckForItem(Item1)
 		local Item2 = self.SaveData.Hotbar[tostring(i)]["1"]
 
 		if Item1.ItemType == Item2.ItemType and Item1.ItemName == Item2.ItemName then
+			return tostring(i)
+		end
+	end
+
+	return false
+end
+
+function Player:FindItem(Item)
+	for i,Slot in pairs(self.SaveData.Hotbar) do
+		if Slot["1"] == Item then
 			return tostring(i)
 		end
 	end
@@ -185,8 +199,8 @@ end
 function Player:Update()
 	if not self.SaveData.Patch then return end
 	
-	for _,Object in pairs(self.SaveData.Patch.Grid) do
-		for _,Block in pairs(Object) do
+	for _,x in pairs(self.SaveData.Patch.Grid) do
+		for _,Block in pairs(x) do
 			if Block.OccupiedBy ~= "None" then
 				Block.OccupiedBy:Update()
 			end

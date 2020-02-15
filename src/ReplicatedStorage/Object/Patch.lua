@@ -1,9 +1,6 @@
 local Object = require(script.Parent)
 local Block = require(script.Parent.Block)
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local NetworkingEvent = ReplicatedStorage.Networking.NetworkingEvent
-
 local Patch = {}
 Patch.__index = Patch
 setmetatable(Patch,{__index = Object})
@@ -30,18 +27,18 @@ function Patch.new(Player)
 	for x = 1,NewPatch.GridSize do
 		for z = 1,NewPatch.GridSize do
 			local Offset = NewPatch.Model.PrimaryPart.Position - Vector3.new(NewPatch.Model.PrimaryPart.Size.X/2,0,NewPatch.Model.PrimaryPart.Size.Z/2)
-			local Dirt = Object.new("Block","Dirt",Vector3.new(x * NewPatch.BlockSize - NewPatch.BlockSize/2, 0, z * NewPatch.BlockSize - NewPatch.BlockSize/2) + Offset,NewPatch.Player)
+			local NewDirt = Object.new("Block","Dirt",Vector3.new(x * NewPatch.BlockSize - NewPatch.BlockSize/2, 0, z * NewPatch.BlockSize - NewPatch.BlockSize/2) + Offset)
 		
-			NewPatch.Grid[tostring(x)][tostring(z)] = Dirt
+			NewPatch.Grid[tostring(x)][tostring(z)] = NewDirt
 			NewPatch:UpdateClient(Player,tostring(x),tostring(z))
 			
-			Dirt.x = tostring(x)
-			Dirt:UpdateClient(Player,x)
+			NewDirt.x = tostring(x)
+			NewDirt:UpdateClient(Player,x)
 			
-			Dirt.z = tostring(z)
-			Dirt:UpdateClient(Player,z)
+			NewDirt.z = tostring(z)
+			NewDirt:UpdateClient(Player,z)
 			
-			Block.BlockList[Dirt.Model] = Dirt
+			Block.BlockList[NewDirt.Model] = NewDirt
 		end
 	end
 	
@@ -51,7 +48,7 @@ end
 function Patch:UpdateClient(Player,x,z)
 	local Block = self.Grid[x][z]
 	
-	NetworkingEvent:FireClient(Player.PlayerObject,"UpdatePatch",x,z,Block)
+	Object.NetworkingEvent:FireClient(Player.PlayerObject,"UpdatePatch",x,z,Block)
 end
 
 return Patch

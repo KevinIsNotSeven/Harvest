@@ -22,6 +22,10 @@ local ItemData = {
 			DisplayName = "Hoe";
 			Value = 50;
 		};
+		WateringCan = {
+			DisplayName = "Watering Can";
+			Value = 50;
+		};
 
 		Activatable = true;
 		Stackable = false;
