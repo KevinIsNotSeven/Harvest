@@ -17,6 +17,6 @@ end
 function Object:Destroy()
 	self = nil
 end
----
+
 return Object
 
