@@ -19,6 +19,9 @@ function placing_mod.GetBlock()
 	--cf = Vector3.new()
 	local f1,f2,f3 = workspace:FindPartOnRayWithWhitelist(Ray.new(cf, Vector3.new(0,-6) ), {workspace.Blocks} )
 	if f1 then
+		f1 = f1:FindFirstAncestor("Dirt").PrimaryPart
+	end
+	if f1 then
 		return f1.Parent, f1.Position, angle
 	else
 		return nil,Vector3.new()

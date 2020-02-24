@@ -5,7 +5,7 @@ return function(char)
 		r.ui_mod.Render()
 		local cf = CFrame.new(char.pos)*char.toface
 		char.Pal:SetPrimaryPartCFrame(cf)
-		
+		char.Pal.Tongue.CFrame = char.Pal.Head.CFrame
 		
 		local cf = workspace.CurrentCamera.CFrame.p
 		--cf = Vector3.new(math.floor(cf.X/4+.5)*4,math.floor(cf.Y/4+.5)*4,math.floor(cf.Z/4+.5)*4)
