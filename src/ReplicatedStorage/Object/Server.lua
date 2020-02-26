@@ -6,6 +6,9 @@ Server.Server = {}
 Server.__index = Server
 setmetatable(Server,{__index = Object})
 
+local Seasons = {"Snowy","Love","Clover","Candy","Flower","Green","Hot","Beach","Chilly","Spooky","Feast","Festive"}
+local Days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"}
+
 function Server.new()
 	local NewServer = {}
 	setmetatable(NewServer,Server)
@@ -17,9 +20,16 @@ function Server.new()
 	
 	NewServer.CanTick = true
 	NewServer.Version = "Testing"
-	
 	NewServer.Id = game.JobId
-	
+
+	NewServer.Time = _G.GetTime("12",false,"Local")
+
+	NewServer.Date = _G.GetDate()
+	NewServer.LongDate = _G.GetLongDate()
+	NewServer.WeekDay = Days[os.date("*t").wday]
+
+	NewServer.Season = Seasons[NewServer.Month]
+
 	return NewServer
 end
 
@@ -39,6 +49,14 @@ end
 function Server:Update()
 	for _,Player in pairs(self.PlayerList) do
 		Player:Update()
+
+		self.Time = _G.GetTime("12",false,"Local")
+
+		self.Date = _G.GetDate()
+		self.LongDate = _G.GetLongDate()
+		self.WeekDay = Days[os.date("*t").wday]
+
+		self.Season = Seasons[self.Month]
 	end
 end
 
