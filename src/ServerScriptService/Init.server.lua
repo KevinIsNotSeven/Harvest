@@ -1,11 +1,10 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 require(game.ServerScriptService.NetworkingServer)
+require(game.ServerScriptService.GlobalFunctions)
 local Object = require(ReplicatedStorage.Object)
 
 local Server = Object.new("Server")
-
-require(game.ServerScriptService.GlobalFunctions)
 
 game.Players.PlayerAdded:Connect(function(PlayerObject)	
 	wait(.5)
