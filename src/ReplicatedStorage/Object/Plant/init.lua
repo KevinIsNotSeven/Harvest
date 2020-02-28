@@ -38,7 +38,7 @@ end
 
 function Plant:Update()
 	if self.Stage ~= PlantData[self.PlantType].MaxStage then
-		self.Ticks = self.Ticks + (1 * self.Multiplier)
+		self.Ticks = self.Ticks + (_G.GetServer().TickRate * self.Multiplier)
 
 		if self.Ticks >= PlantData[self.PlantType].TicksPerStage then
 			self:IncreaseStage()

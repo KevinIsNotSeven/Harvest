@@ -32,7 +32,7 @@ end)
 wait(1)
 
 spawn(function()
-	while wait(1) do
+	while wait(Server.TickRate) do
 		if Server.CanTick then
 			Server:Update()
 		end

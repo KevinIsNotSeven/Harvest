@@ -61,4 +61,19 @@ _G.GetLongDate = function()
 	return Months[Date.month] .. " " .. tostring(Date.day) .. ", " .. tostring(Date.year)
 end
 
+_G.FindClosestKeypoint = function(keypoints,clocktime)
+	local t = clocktime/24
+	local thiskeypoint, nextkeypoint = keypoints[1],keypoints[2]
+	for i,v in pairs(keypoints)do
+		if t>=v.Time then
+			thiskeypoint = v
+			nextkeypoint = keypoints[i+1] or keypoints[1]
+		end
+	end
+	local diff = (nextkeypoint.Time-thiskeypoint.Time)
+	local start = thiskeypoint.Time
+	local ended = nextkeypoint.Time-start
+	return thiskeypoint.Value:Lerp(nextkeypoint.Value, (t-start)/diff)
+end
+
 return true
